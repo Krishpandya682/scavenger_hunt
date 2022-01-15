@@ -1,62 +1,103 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scavanger_hunt/QnA.dart';
+import 'package:scavanger_hunt/Services/auth.dart';
 import 'package:scavanger_hunt/intropages.dart';
+import 'package:scavanger_hunt/models/user.dart';
 import 'package:scavanger_hunt/outropages.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:scavanger_hunt/wrapper.dart';
 
 int levelNum = 1;
 int stageNum = 1;
 const int LEVELS_PER_STAGE = 3;
 const int TOTAL_STAGES = 4;
 final snackBar = SnackBar(content: Text('Wrong...Try Again!'));
-void main() {
-  runApp(MaterialApp(
-    home: HomePage(),
-    theme: ThemeData(
-        backgroundColor: Color(0xff121212),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.all(10.0),
-          primary: Colors.black,
-          textStyle: TextStyle(
-            color: Colors.white,
-            fontFamily: 'PlayFair',
-            fontWeight: FontWeight.bold,
-            fontSize: 15.0,
-            letterSpacing: 1.5,
-          ),
-          shadowColor: Colors.black12,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-        )),
-        appBarTheme: AppBarTheme(
-            backgroundColor: Color(0xff2a2b2d),
-            centerTitle: true,
-            titleTextStyle: TextStyle(
-              color: Colors.white,
-              fontFamily: 'PlayFair',
-              fontWeight: FontWeight.bold,
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
+  @override
+  Widget build(BuildContext context) {
+    return StreamProvider<MyUser>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+        home: FutureBuilder(
+          future: _fbApp,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print(snapshot.error.toString());
+              return Text("Error with database, try again");
+            } else if (snapshot.hasData) {
+              return Wrapper();
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
+        theme: ThemeData(
+            backgroundColor: Color(0xff121212),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.all(10.0),
+              primary: Colors.black,
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontFamily: 'PlayFair',
+                fontWeight: FontWeight.bold,
+                fontSize: 15.0,
+                letterSpacing: 1.5,
+              ),
+              shadowColor: Colors.black12,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
             )),
-        primaryColor: Colors.black,
-        accentColor: Color(0xff3c3f41),
-        textTheme: TextTheme(
-          bodyText1: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'PlayFair',
-            fontSize: 20.0,
-            letterSpacing: 2,
-          ),
-        )),
-  ));
+            appBarTheme: AppBarTheme(
+                backgroundColor: Color(0xff2a2b2d),
+                centerTitle: true,
+                titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'PlayFair',
+                  fontWeight: FontWeight.bold,
+                )),
+            primaryColor: Colors.black,
+            accentColor: Color(0xff3c3f41),
+            textTheme: TextTheme(
+              bodyText1: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'PlayFair',
+                fontSize: 20.0,
+                letterSpacing: 2,
+              ),
+            )),
+      ),
+    );
+  }
 }
 
 class HomePage extends StatelessWidget {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text("Scavenger Hunt"),
+          actions: <Widget>[
+            TextButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('logout'),
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            )
+          ],
         ),
         body: Center(
           child: SingleChildScrollView(

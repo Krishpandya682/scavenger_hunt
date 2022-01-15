@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "814879402474",
+    "project_id": "scavenger-hunt-project",
+    "storage_bucket": "scavenger-hunt-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814879402474:android:9d8023e4220dbf0ef3aa93",
+        "android_client_info": {
+          "package_name": "com.example.scavanger_hunt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814879402474-9oo4sv9fbkaas5pdsq4h39ugk4knb8k6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWVo_UHmzroVKrQfUUDRFkNu0yZODq6-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814879402474-9oo4sv9fbkaas5pdsq4h39ugk4knb8k6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
