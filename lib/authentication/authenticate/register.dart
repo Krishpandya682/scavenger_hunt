@@ -3,14 +3,15 @@ import 'package:scavanger_hunt/Services/auth.dart';
 import 'package:scavanger_hunt/shared/constants.dart';
 import 'package:scavanger_hunt/shared/loading.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+  Register({this.toggleView});
+
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
@@ -28,14 +29,14 @@ class _SignInState extends State<SignIn> {
             appBar: AppBar(
               backgroundColor: Colors.black,
               elevation: 0.5,
-              title: Text('Sign In'),
+              title: Text('Sign Up'),
               actions: <Widget>[
                 TextButton.icon(
                     onPressed: () {
                       widget.toggleView();
                     },
                     icon: Icon(Icons.person),
-                    label: Text('Register'))
+                    label: Text('Sign In'))
               ],
             ),
             body: Container(
@@ -79,18 +80,20 @@ class _SignInState extends State<SignIn> {
                               setState(() {
                                 loading = true;
                               });
-                              dynamic result = await _auth.signInEmailAndPwd(
+                              print(email);
+                              print(password);
+                              dynamic result = await _auth.registerEmailAndPwd(
                                   email, password);
                               if (result == null) {
                                 setState(() {
                                   loading = false;
-                                  error = 'Could not sign in with those creds';
+                                  error = 'please supply a valid email';
                                 });
                               }
                             }
                           },
                           child: Text(
-                            'Sign In',
+                            'Sign Up',
                             style: TextStyle(color: Colors.white),
                           )),
                       SizedBox(

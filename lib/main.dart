@@ -16,6 +16,7 @@ const int TOTAL_STAGES = 4;
 final snackBar = SnackBar(content: Text('Wrong...Try Again!'));
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
