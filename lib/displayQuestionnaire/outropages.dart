@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:scavanger_hunt/InAndOutPages.dart';
-
-import 'main.dart';
+import 'InAndOutPages.dart';
+import 'PasswordPage.dart';
 
 class OutroPages extends StatefulWidget {
   @override

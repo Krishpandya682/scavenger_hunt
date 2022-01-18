@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:scavanger_hunt/InAndOutPages.dart';
+import 'InAndOutPages.dart';
 import 'package:scavanger_hunt/QnA.dart';
 
-import 'main.dart';
+import 'PasswordPage.dart';
+import 'PuzzlePage.dart';
+import '../main.dart';
 
 class IntroPages extends StatefulWidget {
   @override

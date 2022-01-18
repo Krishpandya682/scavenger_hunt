@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:scavanger_hunt/Services/database.dart';
 import 'package:scavanger_hunt/models/user.dart';
 
 class AuthService {
@@ -46,6 +47,10 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: pwd);
       User user = result.user;
+
+      //Create a new document using the uid
+      await DatabaseService(uid: user.uid)
+          .updateQuestionnaireData('audienceName', 1, 3);
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scavanger_hunt/authentication/authenticate/authenticate.dart';
 import 'package:scavanger_hunt/main.dart';
 import 'package:scavanger_hunt/models/user.dart';
+import 'displayQuestionnaire/HomePage.dart';
 
 class Wrapper extends StatelessWidget {
   @override
