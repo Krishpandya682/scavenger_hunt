@@ -1,15 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scavanger_hunt/QnA.dart';
+import 'package:scavanger_hunt/HomePage.dart';
 import 'package:scavanger_hunt/Services/auth.dart';
-import 'displayQuestionnaire/intropages.dart';
 import 'package:scavanger_hunt/models/user.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:scavanger_hunt/wrapper.dart';
-import 'Services/database.dart';
-import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,10 +87,29 @@ class _FinishedPageState extends State<FinishedPage> {
     return Scaffold(
       backgroundColor: Color(0xffff5e0109),
       appBar: AppBar(),
-      body: Container(
-          child: Center(
-        child: QnA.getImageWidget("img.jpg"),
-      )),
+      body: Column(
+        children: [
+          Container(
+            child: Text(
+              "Thanks for using the Scavenger Hunt App, \n\nHope you had fun \n\nSee You Again!!",
+              style: Theme.of(context).textTheme.bodyText1,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+            },
+            child: Text(
+              "Go Home",
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

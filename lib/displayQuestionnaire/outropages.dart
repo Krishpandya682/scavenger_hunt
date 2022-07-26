@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'InAndOutPages.dart';
+import 'package:scavanger_hunt/createQuestionnaire/numericalValues.dart';
 import 'PasswordPage.dart';
+import 'displayHomePage2.dart';
 
 class OutroPages extends StatefulWidget {
   @override
@@ -9,12 +10,11 @@ class OutroPages extends StatefulWidget {
 }
 
 class _OutroPagesState extends State<OutroPages> {
-  List<OutPages> outPagesList = OutPages.getOutPages();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(outPagesList.asMap()[stageNum - 1].title),
+          title: Text(data['OutroTitle' + secNum.toString()]),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -26,11 +26,11 @@ class _OutroPagesState extends State<OutroPages> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                          child: outPagesList.asMap()[stageNum - 1].widget),
+                          child: Text(data['OutroImage' + secNum.toString()])),
                       Container(
                         padding: EdgeInsets.all(30.0),
                         child: Text(
-                          outPagesList.asMap()[stageNum - 1].text,
+                          data['OutroText' + secNum.toString()],
                           style: Theme.of(context).textTheme.bodyText1,
                           textAlign: TextAlign.center,
                         ),

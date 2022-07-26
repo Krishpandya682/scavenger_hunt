@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:scavanger_hunt/QnA.dart';
+import 'package:scavanger_hunt/createQuestionnaire/numericalValues.dart';
+import 'package:scavanger_hunt/displayQuestionnaire/displayHomePage2.dart';
+
 import 'package:scavanger_hunt/shared/constants.dart';
 
 import 'intropages.dart';
 import '../main.dart';
 import 'PuzzlePage.dart';
-
-int stageNum = 1;
 
 class PasswordPage extends StatefulWidget {
   @override
@@ -16,13 +16,12 @@ class PasswordPage extends StatefulWidget {
 
 class _PasswordPageState extends State<PasswordPage> {
   TextEditingController _passwordController = TextEditingController();
-  List<int> passwords = QnA.getPasswords();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Password $stageNum',
+          'Password $secNum',
         ),
       ),
       body: Center(
@@ -44,18 +43,20 @@ class _PasswordPageState extends State<PasswordPage> {
                 child: Center(
                     child: ElevatedButton(
                   onPressed: () {
-                    if (stageNum >= TOTAL_STAGES) {
-                      stageNum = 1;
-                      levelNum = 1;
+                    print(data['Password' + secNum.toString()].runtimeType);
+                    print(int.parse(_passwordController.text).runtimeType);
+                    if (secNum >= data['numSections']) {
+                      secNum = 1;
+                      questNum = 1;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => FinishedPage()));
                       return;
                     }
-                    if (int.parse(_passwordController.text) ==
-                        passwords.asMap()[stageNum - 1]) {
-                      stageNum++;
+                    if (int.parse(_passwordController.text).toString() ==
+                        data['Password' + secNum.toString()]) {
+                      secNum++;
                       Navigator.push(
                           context,
                           MaterialPageRoute(

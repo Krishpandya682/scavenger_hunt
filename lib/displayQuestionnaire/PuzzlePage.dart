@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:scavanger_hunt/QnA.dart';
+import 'package:scavanger_hunt/createQuestionnaire/numericalValues.dart';
 import 'package:scavanger_hunt/shared/constants.dart';
 
+import 'displayHomePage2.dart';
 import 'outropages.dart';
-
-int levelNum = 1;
 
 class PuzzlePage extends StatefulWidget {
   @override
@@ -12,7 +11,6 @@ class PuzzlePage extends StatefulWidget {
 }
 
 class _PuzzlePageState extends State<PuzzlePage> {
-  List<QnA> questions = QnA.getQuestions();
   TextEditingController _answerController = TextEditingController();
 
   @override
@@ -20,7 +18,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Puzzle Number $levelNum',
+          'Question Number $questNum',
         ),
       ),
       body: Center(
@@ -30,13 +28,13 @@ class _PuzzlePageState extends State<PuzzlePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                child: questions.asMap()[levelNum - 1].extraWidget,
+                child: Text(data['Extra' + questNum.toString()]),
               ),
               Container(
                 padding: EdgeInsets.all(30),
                 child: Center(
                     child: Text(
-                  "${questions.asMap()[levelNum - 1].question}",
+                  "${data['Question' + questNum.toString()]}",
                   style: Theme.of(context).textTheme.bodyText1,
                   textAlign: TextAlign.center,
                 )),
@@ -54,9 +52,11 @@ class _PuzzlePageState extends State<PuzzlePage> {
                 child: Center(
                     child: ElevatedButton(
                   onPressed: () {
+                    print(data);
+                    print("Answer => " + data['Answer' + questNum.toString()]);
                     if (_answerController.text.toLowerCase() ==
-                        questions.asMap()[levelNum - 1].answer.toLowerCase()) {
-                      if (levelNum % LEVELS_PER_STAGE == 0) {
+                        data['Answer' + questNum.toString()].toLowerCase()) {
+                      if (questNum % data['numQuesPerSec'] == 0) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -67,7 +67,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             MaterialPageRoute(
                                 builder: (context) => PuzzlePage()));
                       }
-                      levelNum++;
+                      questNum++;
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }

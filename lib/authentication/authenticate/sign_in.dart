@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scavanger_hunt/HomePage.dart';
 import 'package:scavanger_hunt/Services/auth.dart';
 import 'package:scavanger_hunt/shared/constants.dart';
 import 'package:scavanger_hunt/shared/loading.dart';
@@ -81,11 +82,22 @@ class _SignInState extends State<SignIn> {
                               });
                               dynamic result = await _auth.signInEmailAndPwd(
                                   email, password);
+                              print("Heyy");
+
                               if (result == null) {
                                 setState(() {
                                   loading = false;
                                   error = 'Could not sign in with those creds';
                                 });
+                              } else {
+                                setState(() {
+                                  loading = false;
+                                });
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()));
                               }
                             }
                           },

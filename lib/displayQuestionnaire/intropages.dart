@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'InAndOutPages.dart';
-import 'package:scavanger_hunt/QnA.dart';
-
+import 'package:scavanger_hunt/createQuestionnaire/numericalValues.dart';
 import 'PasswordPage.dart';
 import 'PuzzlePage.dart';
 import '../main.dart';
+import 'displayHomePage2.dart';
 
 class IntroPages extends StatefulWidget {
   @override
@@ -13,12 +12,11 @@ class IntroPages extends StatefulWidget {
 }
 
 class _IntroPagesState extends State<IntroPages> {
-  List<InPages> inPagesList = InPages.getInPages();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(inPagesList.asMap()[stageNum - 1].title),
+          title: Text(data['IntroTitle' + secNum.toString()]),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -27,19 +25,20 @@ class _IntroPagesState extends State<IntroPages> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    child: QnA.getImageWidget(
-                        inPagesList.asMap()[stageNum - 1].imgName),
+                    //**********************CREATE IMAGE GETTER*******************//
+                    child: Text(data['IntroImage' + secNum.toString()]),
                   ),
                   Container(
                     padding: EdgeInsets.all(30),
                     child: Text(
-                      inPagesList.asMap()[stageNum - 1].text,
+                      data['IntroText' + secNum.toString()],
                       style: Theme.of(context).textTheme.bodyText1,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      print("Going to PuzzlePage");
                       Navigator.push(
                           context,
                           MaterialPageRoute(
