@@ -7,12 +7,12 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create my custom user
-  MyUser _userFromFirebase(User user) {
+  MyUser? _userFromFirebase(User? user) {
     return user != null ? MyUser(uid: user.uid) : null;
   }
 
   // auth change user stream
-  Stream<MyUser> get user {
+  Stream<MyUser?> get user {
     return _auth.authStateChanges().map(_userFromFirebase);
   }
 
@@ -20,7 +20,7 @@ class AuthService {
   Future signInAnon() async {
     try {
       UserCredential result = await _auth.signInAnonymously();
-      User user = result.user;
+      User? user = result.user;
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());
@@ -33,7 +33,7 @@ class AuthService {
     try {
       UserCredential result =
           await _auth.signInWithEmailAndPassword(email: email, password: pwd);
-      User user = result.user;
+      User? user = result.user;
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());
@@ -46,10 +46,10 @@ class AuthService {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: pwd);
-      User user = result.user;
+      User? user = result.user;
 
       //Create a new document using the uid
-      await DatabaseService(uid: user.uid)
+      await DatabaseService(uid: user!.uid)
           .updateQuestionnaireData('audienceName', 1, 3);
       return _userFromFirebase(user);
     } catch (e) {

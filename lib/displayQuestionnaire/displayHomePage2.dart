@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scavanger_hunt/Services/auth.dart';
+import 'package:scavanger_hunt/authentication/authenticate/authenticate.dart';
 import 'package:scavanger_hunt/authentication/authenticate/sign_in.dart';
 import 'package:scavanger_hunt/createQuestionnaire/numericalValues.dart';
 import 'package:scavanger_hunt/displayQuestionnaire/PasswordPage.dart';
@@ -33,7 +34,7 @@ class DisplayHomePage2 extends StatelessWidget {
           if (snapshot.hasError)
             return Center(child: Text('Error: ${snapshot.error}'));
           else
-            data = snapshot.data.data();
+            data = snapshot.data?.data();
           return Center(
               child: Scaffold(
             appBar: AppBar(
@@ -44,8 +45,10 @@ class DisplayHomePage2 extends StatelessWidget {
                   label: Text('logout'),
                   onPressed: () async {
                     await _auth.signOut();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignIn()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Authenticate()));
                   },
                 )
               ],

@@ -17,24 +17,11 @@ class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<MyUser>.value(
+    return StreamProvider<MyUser?>.value(
+      initialData: null,
       value: AuthService().user,
       child: MaterialApp(
-        home: FutureBuilder(
-          future: _fbApp,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              print(snapshot.error.toString());
-              return Text("Error with database, try again");
-            } else if (snapshot.hasData) {
-              return Wrapper();
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
+        home: Wrapper(),
         theme: ThemeData(
             backgroundColor: Color(0xff121212),
             elevatedButtonTheme: ElevatedButtonThemeData(

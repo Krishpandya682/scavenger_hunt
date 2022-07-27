@@ -45,7 +45,8 @@ class _SectionPasswordState extends State<SectionPassword> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Section ' + secNum.toString() + ' Password'),
-                    validator: (val) => val.isEmpty ? 'Enter a Password' : null,
+                    validator: (val) =>
+                        val!.isEmpty ? 'Enter a Password' : null,
                     onChanged: (val) {
                       setState(() => password = val);
                     }),
@@ -55,7 +56,7 @@ class _SectionPasswordState extends State<SectionPassword> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () async {
-                      if (_formKey.currentState.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         setState(() {
                           loading = true;
                         });

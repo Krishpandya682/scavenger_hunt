@@ -5,7 +5,7 @@ import 'package:scavanger_hunt/shared/loading.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
-  Register({this.toggleView});
+  Register({required this.toggleView});
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -52,7 +52,7 @@ class _RegisterState extends State<Register> {
                           decoration:
                               textInputDecoration.copyWith(hintText: 'Email'),
                           validator: (val) =>
-                              val.isEmpty ? 'Enter an Email' : null,
+                              val!.isEmpty ? 'Enter an Email' : null,
                           onChanged: (val) {
                             setState(() => email = val);
                           }),
@@ -62,7 +62,7 @@ class _RegisterState extends State<Register> {
                       TextFormField(
                           decoration: textInputDecoration.copyWith(
                               hintText: 'Password'),
-                          validator: (val) => val.length < 6
+                          validator: (val) => val!.length < 6
                               ? 'Enter a Password 6+ chars long'
                               : null,
                           obscureText: true,
@@ -76,7 +76,7 @@ class _RegisterState extends State<Register> {
                           style:
                               ElevatedButton.styleFrom(primary: Colors.black),
                           onPressed: () async {
-                            if (_formKey.currentState.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               setState(() {
                                 loading = true;
                               });

@@ -5,5 +5,8 @@ class Questionnaire {
   final int numSections;
   final int numQuesPerSec;
 
-  Questionnaire({this.audienceName, this.numQuesPerSec, this.numSections});
+  Questionnaire(
+      {required this.audienceName,
+      required this.numQuesPerSec,
+      required this.numSections});
 }

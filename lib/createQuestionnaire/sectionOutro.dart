@@ -46,7 +46,7 @@ class _SectionOutroState extends State<SectionOutro> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Outro ' + secNum.toString() + ' Title'),
-                    validator: (val) => val.isEmpty ? 'Enter a title' : null,
+                    validator: (val) => val!.isEmpty ? 'Enter a title' : null,
                     onChanged: (val) {
                       setState(() => outroTitle = val);
                     }),
@@ -56,7 +56,7 @@ class _SectionOutroState extends State<SectionOutro> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Outro ' + secNum.toString() + ' Image'),
-                    validator: (val) => val.isEmpty ? 'Enter an Img' : null,
+                    validator: (val) => val!.isEmpty ? 'Enter an Img' : null,
                     onChanged: (val) {
                       setState(() => outroImgName = val);
                     }),
@@ -66,7 +66,7 @@ class _SectionOutroState extends State<SectionOutro> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Outro ' + secNum.toString() + ' Text'),
-                    validator: (val) => val.isEmpty ? 'Enter some text' : null,
+                    validator: (val) => val!.isEmpty ? 'Enter some text' : null,
                     onChanged: (val) {
                       setState(() => outroText = val);
                     }),
@@ -76,7 +76,7 @@ class _SectionOutroState extends State<SectionOutro> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () async {
-                      if (_formKey.currentState.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         setState(() {
                           loading = true;
                         });

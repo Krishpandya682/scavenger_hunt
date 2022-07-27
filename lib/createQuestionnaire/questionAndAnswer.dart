@@ -46,7 +46,7 @@ class _QuestionAndAnswerState extends State<QuestionAndAnswer> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Extra ' + questNum.toString()),
-                    validator: (val) => val.isEmpty ? 'Enter extra' : null,
+                    validator: (val) => val!.isEmpty ? 'Enter extra' : null,
                     onChanged: (val) {
                       setState(() => extra = val);
                     }),
@@ -56,7 +56,8 @@ class _QuestionAndAnswerState extends State<QuestionAndAnswer> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Question ' + questNum.toString()),
-                    validator: (val) => val.isEmpty ? 'Enter a question' : null,
+                    validator: (val) =>
+                        val!.isEmpty ? 'Enter a question' : null,
                     onChanged: (val) {
                       setState(() => question = val);
                     }),
@@ -66,7 +67,7 @@ class _QuestionAndAnswerState extends State<QuestionAndAnswer> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Answer ' + questNum.toString()),
-                    validator: (val) => val.isEmpty ? 'Enter an answer' : null,
+                    validator: (val) => val!.isEmpty ? 'Enter an answer' : null,
                     onChanged: (val) {
                       setState(() => answer = val);
                     }),
@@ -76,7 +77,7 @@ class _QuestionAndAnswerState extends State<QuestionAndAnswer> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () async {
-                      if (_formKey.currentState.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         setState(() {
                           loading = true;
                         });

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:814879402474:android:9d8023e4220dbf0ef3aa93",
+        "mobilesdk_app_id": "1:814879402474:android:065f8fa76c341a80f3aa93",
         "android_client_info": {
-          "package_name": "com.example.scavanger_hunt"
+          "package_name": "com.example.scavenger_hunt"
         }
       },
       "oauth_client": [

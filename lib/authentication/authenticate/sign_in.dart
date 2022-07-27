@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:scavanger_hunt/HomePage.dart';
 import 'package:scavanger_hunt/Services/auth.dart';
+import 'package:scavanger_hunt/authentication/authenticate/authenticate.dart';
 import 'package:scavanger_hunt/shared/constants.dart';
 import 'package:scavanger_hunt/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+  SignIn({required this.toggleView});
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -52,7 +54,7 @@ class _SignInState extends State<SignIn> {
                           decoration:
                               textInputDecoration.copyWith(hintText: 'Email'),
                           validator: (val) =>
-                              val.isEmpty ? 'Enter an Email' : null,
+                              val!.isEmpty ? 'Enter an Email' : null,
                           onChanged: (val) {
                             setState(() => email = val);
                           }),
@@ -62,7 +64,7 @@ class _SignInState extends State<SignIn> {
                       TextFormField(
                           decoration: textInputDecoration.copyWith(
                               hintText: 'Password'),
-                          validator: (val) => val.length < 6
+                          validator: (val) => val!.length < 6
                               ? 'Enter a Password 6+ chars long'
                               : null,
                           obscureText: true,
@@ -76,7 +78,7 @@ class _SignInState extends State<SignIn> {
                           style:
                               ElevatedButton.styleFrom(primary: Colors.black),
                           onPressed: () async {
-                            if (_formKey.currentState.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               setState(() {
                                 loading = true;
                               });

@@ -7,10 +7,10 @@ import 'package:scavanger_hunt/shared/constants.dart';
 import 'package:scavanger_hunt/Services/database.dart';
 import 'package:provider/provider.dart';
 
-int secNum;
-int questNum;
-int TOTAL_SECTS;
-int QUESTS_PER_SECT;
+int secNum = -1;
+int questNum = -1;
+int TOTAL_SECTS = -1;
+int QUESTS_PER_SECT = -1;
 
 class NumericalValues extends StatefulWidget {
   @override
@@ -49,7 +49,7 @@ class _NumericalValuesState extends State<NumericalValues> {
                 TextFormField(
                     decoration: textInputDecoration.copyWith(
                         hintText: 'Name Of The Audience'),
-                    validator: (val) => val.isEmpty ? 'Enter a Name' : null,
+                    validator: (val) => val!.isEmpty ? 'Enter a Name' : null,
                     onChanged: (val) {
                       setState(() => audienceName = val);
                     }),
@@ -60,16 +60,17 @@ class _NumericalValuesState extends State<NumericalValues> {
                   decoration: textInputDecoration.copyWith(
                       hintText: 'Number Of Sections'),
                   validator: (val) {
-                    if (val.isEmpty) {
+                    if (val!.isEmpty) {
                       return "Please Enter a value";
-                    } else if (int.tryParse(val) < 0 || int.tryParse(val) > 5) {
+                    } else if (int.tryParse(val)! < 0 ||
+                        int.tryParse(val)! > 5) {
                       return 'Enter a number greater than 0 and less than 5';
                     } else {
                       return null;
                     }
                   },
                   onChanged: (val) {
-                    setState(() => numSections = int.tryParse(val));
+                    setState(() => numSections = int.tryParse(val)!);
                   },
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 ),
@@ -80,16 +81,17 @@ class _NumericalValuesState extends State<NumericalValues> {
                   decoration: textInputDecoration.copyWith(
                       hintText: 'Number Of Questions per Section'),
                   validator: (val) {
-                    if (val.isEmpty) {
+                    if (val!.isEmpty) {
                       return "Please Enter a value";
-                    } else if (int.tryParse(val) < 0 || int.tryParse(val) > 5) {
+                    } else if (int.tryParse(val)! < 0 ||
+                        int.tryParse(val)! > 5) {
                       return 'Enter a number greater than 0 and less than 5';
                     } else {
                       return null;
                     }
                   },
                   onChanged: (val) {
-                    setState(() => numQuesPerSec = int.tryParse(val));
+                    setState(() => numQuesPerSec = int.tryParse(val)!);
                   },
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 ),
@@ -99,7 +101,7 @@ class _NumericalValuesState extends State<NumericalValues> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.black),
                     onPressed: () async {
-                      if (_formKey.currentState.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         setState(() {
                           loading = true;
                         });

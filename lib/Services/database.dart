@@ -3,7 +3,7 @@ import 'package:scavanger_hunt/models/questionnaire.dart';
 
 class DatabaseService {
   final String uid;
-  DatabaseService({this.uid});
+  DatabaseService({required this.uid});
 
   //collection reference
   final CollectionReference questionnaireCollection =
@@ -87,6 +87,6 @@ class DatabaseService {
         .collection('questionnaire')
         .doc(uid)
         .get()
-        .then((docSnap) => userData = docSnap.data());
+        .then((docSnap) => userData = docSnap.data()!);
   }
 }
